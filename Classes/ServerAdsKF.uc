@@ -93,6 +93,7 @@ function Mutate(string MutateString, PlayerController sender) {
     local array<string> wordsArray;
     local string command, mod;
     local array<string> modArray;
+    local float f, y;
 
     super.Mutate(MutateString, sender);
 
@@ -163,6 +164,20 @@ function Mutate(string MutateString, PlayerController sender) {
         class'UtilInfoLines'.static.printCredits(sender, self);
     } else if (command ~= "status") {
         class'UtilInfoLines'.static.printStatus(sender, self);
+    } else if (command ~= "test") {
+        Clock(f);
+        class'UtilTest'.static.noLocalTest(self);
+        Unclock(f);
+        warn(">>> noLocalTest: " $ f);
+        Clock(y);
+        class'UtilTest'.static.LocalTest(self);
+        Unclock(y);
+        warn(">>> LocalTest: " $ y);
+        // class'UtilTest'.static.outLocalTest(self);
+        // warn(">>> outLocalTest: " $ f);
+        // class'UtilTest'.static.outNoLocalTest(self);
+        // warn(">>> outNoLocalTest: " $ f);
+
     }
 }
 
